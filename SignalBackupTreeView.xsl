@@ -22,17 +22,22 @@
 		.address, .address_name {
 		  padding: 10px 5px;
 		  background: lightyellow;
-		  float:right;
 		}
 
+		.messages {
+			display: none;
+		}
+		
 		.message {
 		  border: 2px solid darkgray;
 		  margin: 3px;
 		  padding: 3px;
 		}
+
 		.message.receiving:before {
 			content:'ʘ ←';
 		}
+		
 		.message.sending:before {
 			content: 'ʘ →';
 		}
@@ -51,43 +56,60 @@
 					</xsl:if>
 					<xsl:element name="a">
 						<xsl:attribute name="href">#</xsl:attribute>
-						<xsl:attribute name="class">show</xsl:attribute>
-			    		<xsl:element name="span">
-				    		<xsl:attribute name="class">address</xsl:attribute>
-			        		<xsl:value-of select="@address"/>
-			    		</xsl:element> <!-- /address -->
-		    		</xsl:element>
-					<xsl:element name="a">
-						<xsl:attribute name="href">#</xsl:attribute>
-						<xsl:attribute name="class">hide</xsl:attribute>
-			    		<xsl:element name="span">
-				    		<xsl:attribute name="class">address</xsl:attribute>
-			        		<xsl:value-of select="@address"/>
-			    		</xsl:element> <!-- /address -->
-		    		</xsl:element>
-	        		<xsl:for-each select="key('sms-grouped-by-address', @address)">
-			    		<xsl:element name="div">
-				        	<xsl:attribute name="class">
-				        		message 
-				        	<xsl:if test="@type = '1'">
-				        		receiving
-				        	</xsl:if>
-				        	<xsl:if test="@type = '2'">
-				        		sending
-			        		</xsl:if>
-			        		</xsl:attribute>
-	 						<xsl:element name="div">
-	 							<xsl:attribute name="class">date</xsl:attribute>
-	 							<xsl:value-of select="@readable_date"/>
-	 						</xsl:element> <!-- /date -->
-	 						<xsl:element name="div">
-	 							<xsl:attribute name="class">messagebody</xsl:attribute>
-	 							<xsl:value-of select="@body"/>
-							</xsl:element> <!-- /messagebody -->
-						</xsl:element> <!-- /message -->
-	        		</xsl:for-each>
+						<xsl:attribute name="class">expand-collapse-thread address</xsl:attribute>
+		        		<xsl:value-of select="@address"/>
+		    		</xsl:element> <!-- /a -->
+		    		<xsl:element name="div">
+		    		<xsl:attribute name="class">messages</xsl:attribute>
+			    		<xsl:for-each select="key('sms-grouped-by-address', @address)">
+							<xsl:element name="div">
+						    	<xsl:attribute name="class">
+						    		message 
+						    	<xsl:if test="@type = '1'">
+						    		receiving
+						    	</xsl:if>
+						    	<xsl:if test="@type = '2'">
+						    		sending
+					    		</xsl:if>
+					    		</xsl:attribute>
+		 						<xsl:element name="div">
+		 							<xsl:attribute name="class">date</xsl:attribute>
+		 							<xsl:value-of select="@readable_date"/>
+		 						</xsl:element> <!-- /date -->
+		 						<xsl:element name="div">
+		 							<xsl:attribute name="class">messagebody</xsl:attribute>
+		 							<xsl:value-of select="@body"/>
+								</xsl:element> <!-- /messagebody -->
+							</xsl:element> <!-- /message -->
+			    		</xsl:for-each>
+		        	</xsl:element> <!-- /messages -->
 	        	</xsl:element> <!-- /thread -->
 	        </xsl:for-each>
+        <script>
+        /* Expanding and collapsing of individual threads by clicking on the phone number
+
+           Based on https://codepen.io/sheelah/pen/EPEOBb 
+           and https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
+        */
+        
+        var toggleVisibility = function(event) {
+			event.preventDefault();
+
+			var expandedContent = event.target.nextElementSibling;
+			if (!expandedContent || !expandedContent.classList.contains("messages"))
+				return;
+
+			if (expandedContent.style.display == 'block')
+				expandedContent.style.display = 'none';
+			else
+				expandedContent.style.display = 'block';
+		};
+		
+		var messagethreads = document.querySelectorAll('.expand-collapse-thread');
+		[].forEach.call(messagethreads, function(div) {
+		  div.addEventListener('click', toggleVisibility);
+		});
+        </script>
         </body>
         </html>
     </xsl:template>

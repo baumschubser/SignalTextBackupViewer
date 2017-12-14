@@ -1,13 +1,11 @@
 # SignalTextBackupViewer
 A comfortable view of your SignalPlaintextBackup.xml
 
-This is a super early version.
-
 ![A screenshot of the current version](screenshot.png "This is what it looks like on my PC.")
 
 
 # Features
-* Sorts messages by contact
+* Sorts messages by contact in collapseable threads
 * Displays name next to number (if available)
 * Marks received and sent messages
 
@@ -18,6 +16,6 @@ This is a super early version.
 * Open the .xml file with a web browser
 
 # Known Issues
-* It may be that message content makes the .xml invalid. Test this with a xml validator.
+* It may be that message content makes the .xml invalid. Test this with a xml validator first.
 * It's super ugly.
-* There is no collapse/expand mechanism for the grouped message threads. I am on it and that is the reason why you see the telephone number two times.
+
