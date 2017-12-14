@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="SignalBackupTreeView.xsl"?>
+<smses count="6610">
+ <sms protocol="0" address="123" contact_name="friend A" date="1396822753536" readable_date="Mo., 07 Apr 2014 00:19:13 MESZ" type="1" subject="null" body="a message: you should really use your own SignalPlaintextBackup.xml instead of this dummy file. Copy the second line of this file (the one that embeds the .xsl) into your SignalPlaintextBackup.xml and open it in a web browser." toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+ <sms protocol="0" address="123" contact_name="friend A" date="1396822306470" readable_date="Mo., 07 Apr 2014 00:11:46 MESZ" type="2" subject="null" body="a message back" toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+ <sms protocol="0" address="123" contact_name="friend A" date="1396735698620" readable_date="So., 06 Apr 2014 00:08:18 MESZ" type="1" subject="null" body="a message back" toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+ <sms protocol="0" address="456" contact_name="friend B" date="1396822753536" readable_date="Mo., 07 Apr 2014 00:19:13 MESZ" type="1" subject="null" body="a message" toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+ <sms protocol="0" address="456" contact_name="friend B" date="1396822306470" readable_date="Mo., 07 Apr 2014 00:11:46 MESZ" type="2" subject="null" body="a message back" toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+ <sms protocol="0" address="456" contact_name="friend B" date="1396735698620" readable_date="So., 06 Apr 2014 00:08:18 MESZ" type="1" subject="null" body="a message back" toa="null" sc_toa="null" service_center="null" read="1" status="-1" locked="0" />
+</smses>
