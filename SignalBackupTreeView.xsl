@@ -3,8 +3,6 @@
 	<xsl:key name="sms-grouped-by-address" match="sms" use="@address" />
 
     <xsl:template match="smses">
-        <html>
-        <head>
         <style>
         body {
 		  font-family: sans-serif;
@@ -42,8 +40,6 @@
 			content: 'ʘ →';
 		}
         </style>
-        </head>
-        <body>
 	        <xsl:for-each select="sms[count(. | key('sms-grouped-by-address', @address)[1]) = 1]">
 	        	<xsl:sort select="@address" />
 	        	<xsl:element name="div">
@@ -110,7 +106,5 @@
 		  div.addEventListener('click', toggleVisibility);
 		});
         </script>
-        </body>
-        </html>
     </xsl:template>
 </xsl:stylesheet>
