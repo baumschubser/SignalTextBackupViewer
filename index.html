@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
+  <title>Signal backup XML view</title>
+  <style>
+	#dropzone {
+		border: 3px dashed black;
+		height: 100px;
+		text-align: center;
+		padding: 30px;
+		background-color: #f3f3f3;
+		display: table-cell; vertical-align: middle;
+	}
+</style>
+</head>
+<body>
+	<div id="dropzone">
+		<strong>Drop SignalPlaintextBackup.xml here</strong>
+	</div>
+<div id="result"></div>
+<script>
+  function dropFile(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList Objekt
+    processXML(files[0]);
+  }
+
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; 
+  }
+  
+  function processXML(file){
+	var xslStylesheet;
+	var xsltProcessor = new XSLTProcessor();
+	var reader = new FileReader();
+	var domParser = new window.DOMParser();
+	var xmlDoc;
+
+	// load the xslt file
+	var myXMLHTTPRequest = new XMLHttpRequest();
+	myXMLHTTPRequest.open("GET", "SignalBackupTreeView.xsl", false);
+	myXMLHTTPRequest.send(null);
+
+	xslStylesheet = myXMLHTTPRequest.responseXML;
+	xsltProcessor.importStylesheet(xslStylesheet);
+
+	// load and parse the xml file
+	reader.readAsText(file);
+
+	reader.onload = function(e) {
+		xmlDoc = domParser.parseFromString(e.target.result, "text/xml");
+	
+		//process XSL transformation
+		var fragment = xsltProcessor.transformToFragment(xmlDoc, document);
+
+		document.getElementById("result").innerHTML = "";
+		document.getElementById("result").appendChild(fragment);
+	}
+}
+
+  // Initialise Drag&Drop EventListener
+  var dropZone = document.getElementById('dropzone');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', dropFile, false);
+</script>
+</body>
+</html>
+
+
