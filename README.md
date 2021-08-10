@@ -1,3 +1,5 @@
+> :warning: **THIS IS OLD**: This refers to a very old feature of a very old version of Signal (or "TextSecure" what it was called back then). It will not work on current versions of Signal.
+
 # SignalTextBackupViewer
 A comfortable view of your SignalPlaintextBackup.xml
 
